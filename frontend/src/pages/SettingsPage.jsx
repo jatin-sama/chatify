@@ -114,6 +114,7 @@ const SettingsPage = () => {
         {/* Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
         <div
+          key={isMinecraftMode ? `biome-${biome}` : `theme-${theme}`}
           className={`rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg biome-transition ${isMinecraftMode && biome ? `biome-${biome}` : ''}`}
           data-theme={isMinecraftMode ? undefined : theme}
         >
