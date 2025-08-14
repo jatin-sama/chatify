@@ -1,6 +1,6 @@
-import { THEMES } from "../constants";
+import { THEMES, BIOMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
-import { Send } from "lucide-react";
+import { Send, Gamepad2 } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
@@ -8,25 +8,91 @@ const PREVIEW_MESSAGES = [
 ];
 
 const SettingsPage = () => {
-  const { theme, setTheme } = useThemeStore();
+  const { theme, setTheme, biome, setBiome, isMinecraftMode, setMinecraftMode } = useThemeStore();
 
   return (
     <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
-        <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+        {/* Minecraft Mode Toggle */}
+        <div className="flex flex-col gap-4 p-4 bg-base-200 rounded-xl">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Gamepad2 className="w-6 h-6 text-primary" />
+              <div>
+                <h2 className="text-lg font-semibold">Minecraft Mode</h2>
+                <p className="text-sm text-base-content/70">Experience dynamic biome themes with animated effects</p>
+              </div>
+            </div>
+            <input
+              type="checkbox"
+              className="toggle toggle-primary"
+              checked={isMinecraftMode}
+              onChange={(e) => setMinecraftMode(e.target.checked)}
+            />
+          </div>
         </div>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+        {/* Biome Selection */}
+        {isMinecraftMode && (
+          <div className="space-y-4">
+            <div className="flex flex-col gap-1">
+              <h2 className="text-lg font-semibold">Biome Selection</h2>
+              <p className="text-sm text-base-content/70">Choose your Minecraft biome environment</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {BIOMES.map((biomeOption) => (
+                <button
+                  key={biomeOption.id}
+                  className={`
+                    biome-transition p-4 rounded-xl border-2 text-left
+                    ${biome === biomeOption.id
+                      ? "border-primary bg-primary/10 biome-glow"
+                      : "border-base-300 bg-base-100 hover:border-primary/50"
+                    }
+                  `}
+                  onClick={() => setBiome(biomeOption.id)}
+                >
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">{biomeOption.icon}</span>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-base">{biomeOption.name}</h3>
+                      <p className="text-sm text-base-content/70 mt-1">{biomeOption.description}</p>
+                      <div className="flex gap-1 mt-2">
+                        {biomeOption.preview.map((color, index) => (
+                          <div
+                            key={index}
+                            className="w-4 h-4 rounded-full border border-base-300"
+                            style={{ backgroundColor: color }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Regular Theme Selection */}
+        {!isMinecraftMode && (
+          <>
+            <div className="flex flex-col gap-1">
+              <h2 className="text-lg font-semibold">Theme</h2>
+              <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+            </div>
+
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
               key={t}
               className={`
                 group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors
                 ${theme === t ? "bg-base-200" : "hover:bg-base-200/50"}
+                ${isMinecraftMode ? "opacity-50 cursor-not-allowed" : ""}
               `}
-              onClick={() => setTheme(t)}
+              onClick={() => !isMinecraftMode && setTheme(t)}
             >
               <div className="relative h-8 w-full rounded-md overflow-hidden" data-theme={t}>
                 <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
@@ -41,11 +107,17 @@ const SettingsPage = () => {
               </span>
             </button>
           ))}
-        </div>
+            </div>
+          </>
+        )}
 
         {/* Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
-        <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
+        <div
+          key={isMinecraftMode ? `biome-${biome}` : `theme-${theme}`}
+          className={`rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg biome-transition ${isMinecraftMode && biome ? `biome-${biome}` : ''}`}
+          data-theme={isMinecraftMode ? undefined : theme}
+        >
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
               {/* Mock Chat UI */}
@@ -72,7 +144,7 @@ const SettingsPage = () => {
                     >
                       <div
                         className={`
-                          max-w-[80%] rounded-xl p-3 shadow-sm
+                          max-w-[80%] rounded-xl p-3 shadow-sm chat-bubble
                           ${message.isSent ? "bg-primary text-primary-content" : "bg-base-200"}
                         `}
                       >

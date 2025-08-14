@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import BiomeParticles from "./components/BiomeParticles";
 
 import HomePage from "./pages/HomePage";
 import SignUpPage from "./pages/SignUpPage";
@@ -16,13 +17,14 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
-  const { theme } = useThemeStore();
+  const { theme, initializeTheme } = useThemeStore();
 
   console.log({ onlineUsers });
 
   useEffect(() => {
     checkAuth();
-  }, [checkAuth]);
+    initializeTheme();
+  }, [checkAuth, initializeTheme]);
 
   console.log({ authUser });
 
@@ -34,7 +36,8 @@ const App = () => {
     );
 
   return (
-    <div data-theme={theme}>
+    <div data-theme={theme} className="biome-transition">
+      <BiomeParticles />
       <Navbar />
 
       <Routes>
