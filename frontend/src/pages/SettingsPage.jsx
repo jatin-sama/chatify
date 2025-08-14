@@ -1,6 +1,6 @@
-import { THEMES } from "../constants";
+import { THEMES, BIOMES } from "../constants";
 import { useThemeStore } from "../store/useThemeStore";
-import { Send } from "lucide-react";
+import { Send, Gamepad2 } from "lucide-react";
 
 const PREVIEW_MESSAGES = [
   { id: 1, content: "Hey! How's it going?", isSent: false },
