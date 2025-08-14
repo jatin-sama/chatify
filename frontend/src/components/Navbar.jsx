@@ -23,11 +23,12 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
+            <BiomeSelector />
             <Link
               to={"/settings"}
               className={`
               btn btn-sm gap-2 transition-colors
-              
+
               `}
             >
               <Settings className="w-4 h-4" />
