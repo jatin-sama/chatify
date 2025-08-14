@@ -224,3 +224,74 @@
   border: 2px solid rgba(26, 107, 138, 0.3);
   background: rgba(26, 40, 48, 0.8);
 }
+
+/* Preview section specific styling */
+.biome-overworld .bg-base-100 {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-overworld .bg-base-200 {
+  background-color: var(--color-surface) !important;
+}
+
+.biome-overworld .bg-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-nether .bg-base-100 {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-nether .bg-base-200 {
+  background-color: var(--color-surface) !important;
+}
+
+.biome-nether .bg-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-end .bg-base-100 {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-end .bg-base-200 {
+  background-color: var(--color-surface) !important;
+}
+
+.biome-end .bg-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-cherry .bg-base-100 {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-cherry .bg-base-200 {
+  background-color: var(--color-surface) !important;
+}
+
+.biome-cherry .bg-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-deepdark .bg-base-100 {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text) !important;
+}
+
+.biome-deepdark .bg-base-200 {
+  background-color: var(--color-surface) !important;
+}
+
+.biome-deepdark .bg-primary {
+  background-color: var(--color-primary) !important;
+  color: var(--color-text) !important;
+}
