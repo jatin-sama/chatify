@@ -139,7 +139,7 @@ const SettingsPage = () => {
                     >
                       <div
                         className={`
-                          max-w-[80%] rounded-xl p-3 shadow-sm
+                          max-w-[80%] rounded-xl p-3 shadow-sm chat-bubble
                           ${message.isSent ? "bg-primary text-primary-content" : "bg-base-200"}
                         `}
                       >
