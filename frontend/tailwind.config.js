@@ -1,4 +1,5 @@
 import daisyui from "daisyui";
+import biomeThemes from "./src/plugins/biomeThemes.js";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -6,7 +7,7 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [daisyui],
+  plugins: [daisyui, biomeThemes],
   daisyui: {
     themes: [
       "light",
