@@ -36,18 +36,19 @@ export const useThemeStore = create((set, get) => ({
 
   setMinecraftMode: (enabled) => {
     localStorage.setItem("minecraft-mode", enabled.toString());
+
+    // Always clean slate first
+    document.documentElement.classList.remove('minecraft-ui');
+    BIOME_THEMES.forEach(b => {
+      document.documentElement.classList.remove(`biome-${b}`);
+    });
+    document.documentElement.removeAttribute("data-theme");
+
     if (enabled) {
       const currentBiome = get().biome || "overworld";
       document.documentElement.classList.add('minecraft-ui');
-      // Remove any existing theme attribute when switching to Minecraft mode
-      document.documentElement.removeAttribute("data-theme");
-      get().setBiome(currentBiome);
+      document.documentElement.classList.add(`biome-${currentBiome}`);
     } else {
-      // Remove all biome classes and minecraft styling
-      document.documentElement.classList.remove('minecraft-ui');
-      BIOME_THEMES.forEach(b => {
-        document.documentElement.classList.remove(`biome-${b}`);
-      });
       // Restore regular theme
       document.documentElement.setAttribute("data-theme", get().theme);
     }
