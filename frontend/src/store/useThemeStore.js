@@ -4,8 +4,8 @@ const BIOME_THEMES = ["overworld", "nether", "end", "cherry", "deepdark"];
 
 export const useThemeStore = create((set, get) => ({
   theme: localStorage.getItem("chat-theme") || "coffee",
-  biome: localStorage.getItem("chat-biome") || null,
-  isMinecraftMode: localStorage.getItem("minecraft-mode") === "true",
+  biome: localStorage.getItem("chat-biome") || "overworld",
+  isMinecraftMode: localStorage.getItem("minecraft-mode") !== "false", // Default to true
 
   setTheme: (theme) => {
     localStorage.setItem("chat-theme", theme);
@@ -30,9 +30,11 @@ export const useThemeStore = create((set, get) => ({
     localStorage.setItem("minecraft-mode", enabled.toString());
     if (enabled) {
       const currentBiome = get().biome || "overworld";
+      document.documentElement.classList.add('minecraft-ui');
       get().setBiome(currentBiome);
     } else {
-      // Remove all biome classes
+      // Remove all biome classes and minecraft styling
+      document.documentElement.classList.remove('minecraft-ui');
       BIOME_THEMES.forEach(b => {
         document.documentElement.classList.remove(`biome-${b}`);
       });
@@ -45,8 +47,11 @@ export const useThemeStore = create((set, get) => ({
   // Initialize theme on app load
   initializeTheme: () => {
     const { theme, biome, isMinecraftMode } = get();
-    if (isMinecraftMode && biome) {
-      document.documentElement.classList.add(`biome-${biome}`);
+    if (isMinecraftMode) {
+      document.documentElement.classList.add('minecraft-ui');
+      if (biome) {
+        document.documentElement.classList.add(`biome-${biome}`);
+      }
     } else {
       document.documentElement.setAttribute("data-theme", theme);
     }

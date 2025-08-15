@@ -1,8 +1,39 @@
 /* Biome-specific background patterns and effects */
 
+/* Background image optimizations */
+.biome-overworld,
+.biome-nether,
+.biome-end,
+.biome-cherry,
+.biome-deepdark {
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition: background 0.8s ease-in-out;
+}
+
+/* Mobile optimization - disable fixed attachment for better performance */
+@media (max-width: 768px) {
+  .biome-overworld,
+  .biome-nether,
+  .biome-end,
+  .biome-cherry,
+  .biome-deepdark {
+    background-attachment: scroll;
+  }
+}
+
 /* Overworld */
 .biome-overworld {
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  background:
+    linear-gradient(rgba(109, 179, 63, 0.7), rgba(109, 179, 63, 0.7)),
+    url('https://images.pexels.com/photos/740593/pexels-photo-740593.jpeg'),
+    var(--block-texture),
+    linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-overworld::before {
@@ -12,16 +43,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(123, 199, 123, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(79, 163, 247, 0.08) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(127, 181, 71, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(86, 192, 224, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, transparent 0%, rgba(86, 192, 224, 0.1) 20%, transparent 40%);
   pointer-events: none;
   z-index: -1;
+  animation: cloud-drift 20s linear infinite;
+}
+
+@keyframes cloud-drift {
+  0% { background-position: 0% 0%, 100% 0%, 0% 0%; }
+  100% { background-position: 100% 0%, 0% 0%, 100% 0%; }
 }
 
 /* Nether */
 .biome-nether {
-  background: radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
+  background:
+    linear-gradient(rgba(45, 15, 15, 0.8), rgba(45, 15, 15, 0.8)),
+    url('https://images.pexels.com/photos/73830/lava-magma-volcanic-eruption-glow-73830.jpeg'),
+    var(--block-texture),
+    radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-nether::before {
@@ -31,23 +78,43 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 30% 80%, rgba(255, 77, 0, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 107, 26, 0.1) 0%, transparent 50%),
-    linear-gradient(45deg, transparent 40%, rgba(255, 77, 0, 0.05) 50%, transparent 60%);
+  background-image:
+    radial-gradient(circle at 30% 80%, rgba(255, 102, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 153, 51, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 60% 60%, rgba(255, 68, 0, 0.25) 0%, transparent 60%),
+    linear-gradient(45deg, transparent 40%, rgba(255, 102, 0, 0.1) 50%, transparent 60%);
   pointer-events: none;
   z-index: -1;
-  animation: lava-glow 4s ease-in-out infinite alternate;
+  animation: lava-glow 3s ease-in-out infinite alternate;
 }
 
 @keyframes lava-glow {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.7;
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.2) hue-rotate(5deg);
+  }
+  100% {
+    opacity: 0.9;
+    filter: brightness(1.1) hue-rotate(-5deg);
+  }
 }
 
 /* End */
 .biome-end {
-  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  background:
+    linear-gradient(rgba(255, 251, 240, 0.8), rgba(255, 251, 240, 0.6)),
+    url('https://images.pexels.com/photos/7245549/pexels-photo-7245549.jpeg'),
+    var(--block-texture),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 80%, #2b2b2b 100%);
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: overlay, normal, normal, normal;
+  image-rendering: pixelated;
 }
 
 .biome-end::before {
@@ -57,16 +124,43 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(165, 110, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(180, 122, 255, 0.08) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(180, 126, 221, 0.2) 0%, transparent 60%),
+    radial-gradient(circle at 80% 20%, rgba(214, 153, 255, 0.15) 0%, transparent 70%),
+    radial-gradient(circle at 60% 80%, rgba(180, 126, 221, 0.1) 0%, transparent 50%),
+    linear-gradient(0deg, rgba(43, 43, 43, 0.6) 0%, transparent 30%);
   pointer-events: none;
   z-index: -1;
+  animation: void-shimmer 8s ease-in-out infinite;
+}
+
+@keyframes void-shimmer {
+  0%, 100% {
+    opacity: 0.8;
+    filter: hue-rotate(0deg);
+  }
+  33% {
+    opacity: 1;
+    filter: hue-rotate(10deg);
+  }
+  66% {
+    opacity: 0.9;
+    filter: hue-rotate(-10deg);
+  }
 }
 
 /* Cherry Grove */
 .biome-cherry {
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 50%, var(--color-bg) 100%);
+  background:
+    linear-gradient(rgba(230, 242, 230, 0.7), rgba(240, 214, 232, 0.7)),
+    url('https://images.pexels.com/photos/32654435/pexels-photo-32654435.jpeg'),
+    var(--block-texture),
+    linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 50%, var(--color-bg) 100%);
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, normal, normal;
+  image-rendering: pixelated;
 }
 
 .biome-cherry::before {
@@ -76,16 +170,38 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 25% 25%, rgba(255, 138, 200, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 179, 217, 0.08) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 105, 180, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 10%, rgba(255, 105, 180, 0.1) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
+  animation: petal-breeze 15s ease-in-out infinite;
+}
+
+@keyframes petal-breeze {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 50% 0%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 10% 5%, 90% 95%, 60% 5%;
+    opacity: 1;
+  }
 }
 
 /* Deep Dark */
 .biome-deepdark {
-  background: radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
+  background:
+    linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
+    url('https://images.pexels.com/photos/1878795/pexels-photo-1878795.jpeg'),
+    var(--block-texture),
+    radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-deepdark::before {
@@ -95,60 +211,128 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 30% 80%, rgba(6, 70, 99, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 70% 30%, rgba(26, 107, 138, 0.15) 0%, transparent 50%);
+  background-image:
+    radial-gradient(circle at 30% 80%, rgba(0, 204, 204, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 70% 30%, rgba(64, 224, 208, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(0, 204, 204, 0.25) 0%, transparent 35%),
+    radial-gradient(circle at 10% 10%, rgba(64, 224, 208, 0.15) 0%, transparent 45%);
   pointer-events: none;
   z-index: -1;
-  animation: sculk-ambient 6s ease-in-out infinite alternate;
+  animation: sculk-ambient 4s ease-in-out infinite alternate;
 }
 
 @keyframes sculk-ambient {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.6;
+    filter: brightness(0.8) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.3) hue-rotate(15deg);
+  }
+  100% {
+    opacity: 0.8;
+    filter: brightness(1.1) hue-rotate(-10deg);
+  }
 }
 
 /* Enhanced chat bubbles for biomes */
 .biome-overworld .chat-bubble {
-  border-radius: 1rem;
-  border: 2px solid rgba(123, 199, 123, 0.3);
-  box-shadow: 0 4px 8px rgba(123, 199, 123, 0.1);
+  border-radius: 0;
+  border: 3px solid var(--color-border);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.3),
+    inset -2px -2px 0 rgba(0,0,0,0.2),
+    2px 2px 0 rgba(0,0,0,0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
 }
 
 .biome-nether .chat-bubble {
-  border-radius: 0.5rem;
-  border: 2px solid rgba(255, 107, 26, 0.3);
-  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.2);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,153,51,0.4),
+    inset -2px -2px 0 rgba(139,0,0,0.6),
+    2px 2px 0 rgba(0,0,0,0.3),
+    0 0 8px rgba(255,102,0,0.4);
   position: relative;
+  background: linear-gradient(145deg, rgba(255,102,0,0.1), rgba(139,0,0,0.1));
+  animation: lava-bubble 2s ease-in-out infinite;
 }
 
 .biome-nether .chat-bubble::before {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: 0.5rem;
-  background: linear-gradient(45deg, transparent, rgba(255, 107, 26, 0.1), transparent);
+  inset: -1px;
+  border-radius: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 102, 0, 0.2), transparent);
   z-index: -1;
+  animation: lava-glow 1.5s ease-in-out infinite alternate;
 }
 
 .biome-end .chat-bubble {
-  border-radius: 1.5rem;
-  border: 2px solid rgba(180, 122, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(165, 110, 255, 0.15);
-  backdrop-filter: blur(4px);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(214,153,255,0.4),
+    inset -2px -2px 0 rgba(93,58,133,0.4),
+    2px 2px 0 rgba(43,43,43,0.3),
+    0 0 12px rgba(180,126,221,0.3);
+  backdrop-filter: blur(2px);
+  background: linear-gradient(145deg, rgba(255,251,240,0.1), rgba(180,126,221,0.05));
+  animation: end-float 4s ease-in-out infinite;
 }
 
 .biome-cherry .chat-bubble {
-  border-radius: 1.2rem;
-  border: 2px solid rgba(255, 179, 217, 0.3);
-  box-shadow: 0 4px 8px rgba(255, 138, 200, 0.1);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,182,193,0.5),
+    inset -2px -2px 0 rgba(255,105,180,0.3),
+    2px 2px 0 rgba(0,0,0,0.1),
+    0 0 6px rgba(255,105,180,0.2);
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,105,180,0.05));
+  position: relative;
+}
+
+.biome-cherry .chat-bubble::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  background: var(--particle-color);
+  border-radius: 50% 0 50% 0;
+  animation: petal-fall 3s ease-in-out infinite;
 }
 
 .biome-deepdark .chat-bubble {
-  border-radius: 0.8rem;
-  border: 2px solid rgba(26, 107, 138, 0.3);
-  box-shadow: 0 4px 20px rgba(6, 70, 99, 0.3);
-  animation: sculk-pulse 4s ease-in-out infinite;
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(64,224,208,0.3),
+    inset -2px -2px 0 rgba(0,51,51,0.6),
+    2px 2px 0 rgba(0,0,0,0.5),
+    0 0 15px rgba(0,204,204,0.4);
+  background: linear-gradient(145deg, rgba(64,224,208,0.05), rgba(0,0,0,0.1));
+  animation: sculk-pulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+.biome-deepdark .chat-bubble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: linear-gradient(45deg, transparent, rgba(0,204,204,0.1), transparent);
+  z-index: -1;
+  animation: sculk-ambient 2s ease-in-out infinite alternate;
 }
 
 /* Animated UI elements */
@@ -223,6 +407,228 @@
 .biome-deepdark .input {
   border: 2px solid rgba(26, 107, 138, 0.3);
   background: rgba(26, 40, 48, 0.8);
+}
+
+/* Enhanced particle-specific animations */
+@keyframes overworld-particle-drift {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-20px) translateX(30px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes nether-ember-rise {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0.5);
+    opacity: 0;
+    filter: brightness(1);
+  }
+  20% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: translateY(-30px) translateX(20px) scale(1.2);
+    opacity: 0;
+    filter: brightness(2);
+  }
+}
+
+@keyframes end-void-float {
+  0% {
+    transform: translateY(100vh) translateX(0) rotate(0deg);
+    opacity: 0;
+    filter: hue-rotate(0deg);
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-40px) translateX(-15px) rotate(180deg);
+    opacity: 0;
+    filter: hue-rotate(30deg);
+  }
+}
+
+@keyframes cherry-petal-dance {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(25vh) translateX(10px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-5px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(75vh) translateX(15px) rotate(270deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sculk-pulse-particle {
+  0% {
+    transform: translateY(100vh) scale(0.3);
+    opacity: 0;
+    filter: brightness(0.5);
+  }
+  20% {
+    opacity: 1;
+    filter: brightness(2);
+  }
+  40% {
+    transform: translateY(80vh) scale(0.8);
+    filter: brightness(1);
+  }
+  60% {
+    transform: translateY(60vh) scale(1.2);
+    filter: brightness(1.5);
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  100% {
+    transform: translateY(-20px) scale(0.5);
+    opacity: 0;
+    filter: brightness(0.3);
+  }
+}
+
+/* Biome-specific UI enhancements */
+.minecraft-ui .biome-overworld {
+  font-family: 'Press Start 2P', monospace;
+}
+
+.minecraft-ui .biome-nether {
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 0 0 4px var(--glow-color);
+}
+
+.minecraft-ui .biome-end {
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 0 0 6px var(--glow-color);
+}
+
+.minecraft-ui .biome-cherry {
+  font-family: 'Press Start 2P', monospace;
+}
+
+.minecraft-ui .biome-deepdark {
+  font-family: 'Press Start 2P', monospace;
+  text-shadow: 0 0 8px var(--glow-color);
+}
+
+/* Enhanced background image animations */
+
+/* Overworld background subtle movement */
+@keyframes overworld-sway {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% {
+    background-position: center calc(50% + 2px), center calc(50% + 2px), 0 0, 0 0;
+    filter: brightness(1.05) hue-rotate(2deg);
+  }
+}
+
+.biome-overworld {
+  animation: overworld-sway 20s ease-in-out infinite !important;
+}
+
+/* Nether background flickering effect */
+@keyframes nether-flicker {
+  0%, 100% {
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+  25% {
+    filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+  }
+  75% {
+    filter: brightness(0.95) contrast(1.05) hue-rotate(-3deg);
+  }
+}
+
+.biome-nether {
+  animation: nether-flicker 4s ease-in-out infinite !important;
+}
+
+/* End background ethereal float */
+@keyframes end-ethereal {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) hue-rotate(0deg) blur(0px);
+  }
+  33% {
+    background-position: center calc(50% - 3px), center calc(50% - 3px), 0 0, 0 0;
+    filter: brightness(1.1) hue-rotate(10deg) blur(0.5px);
+  }
+  66% {
+    background-position: center calc(50% + 3px), center calc(50% + 3px), 0 0, 0 0;
+    filter: brightness(0.9) hue-rotate(-10deg) blur(0px);
+  }
+}
+
+.biome-end {
+  animation: end-ethereal 12s ease-in-out infinite !important;
+}
+
+/* Cherry background gentle breeze */
+@keyframes cherry-breeze {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    background-position: center calc(50% + 1px), center calc(50% + 1px), 5px 0, 0 0;
+    filter: brightness(1.05) saturate(1.1);
+  }
+}
+
+.biome-cherry {
+  animation: cherry-breeze 15s ease-in-out infinite !important;
+}
+
+/* Deep Dark background subtle pulse */
+@keyframes deepdark-pulse {
+  0%, 100% {
+    filter: brightness(0.8) contrast(1.2);
+  }
+  50% {
+    filter: brightness(1) contrast(1.4);
+  }
+}
+
+.biome-deepdark {
+  animation: deepdark-pulse 8s ease-in-out infinite !important;
 }
 
 /* Preview section specific styling */

@@ -1,0 +1,26 @@
+/* Image preloading for faster biome transitions */
+body::before {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  background: 
+    url('https://images.pexels.com/photos/740593/pexels-photo-740593.jpeg'),
+    url('https://images.pexels.com/photos/73830/lava-magma-volcanic-eruption-glow-73830.jpeg'),
+    url('https://images.pexels.com/photos/7245549/pexels-photo-7245549.jpeg'),
+    url('https://images.pexels.com/photos/32654435/pexels-photo-32654435.jpeg'),
+    url('https://images.pexels.com/photos/1878795/pexels-photo-1878795.jpeg');
+}
+
+/* Performance optimizations for background images */
+.biome-overworld,
+.biome-nether,
+.biome-end,
+.biome-cherry,
+.biome-deepdark {
+  will-change: transform, filter;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

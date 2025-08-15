@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
+import { useThemeStore } from "../store/useThemeStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -8,6 +9,7 @@ const MessageInput = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
   const { sendMessage } = useChatStore();
+  const { isMinecraftMode } = useThemeStore();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -55,12 +57,17 @@ const MessageInput = () => {
             <img
               src={imagePreview}
               alt="Preview"
-              className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
+              className={`
+                w-20 h-20 object-cover border border-zinc-700
+                ${isMinecraftMode ? 'rounded-none border-4 border-primary' : 'rounded-lg'}
+              `}
             />
             <button
               onClick={removeImage}
-              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-base-300
-              flex items-center justify-center"
+              className={`
+                absolute -top-1.5 -right-1.5 w-5 h-5 bg-base-300 flex items-center justify-center
+                ${isMinecraftMode ? 'rounded-none border-2 border-error pixel-btn' : 'rounded-full'}
+              `}
               type="button"
             >
               <X className="size-3" />
@@ -73,8 +80,11 @@ const MessageInput = () => {
         <div className="flex-1 flex gap-2">
           <input
             type="text"
-            className="w-full input input-bordered rounded-lg input-sm sm:input-md"
-            placeholder="Type a message..."
+            className={`
+              w-full input input-bordered input-sm sm:input-md
+              ${isMinecraftMode ? 'pixel-input rounded-none border-4 border-base-300' : 'rounded-lg'}
+            `}
+            placeholder={isMinecraftMode ? "Type message..." : "Type a message..."}
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -88,8 +98,11 @@ const MessageInput = () => {
 
           <button
             type="button"
-            className={`hidden sm:flex btn btn-circle
-                     ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
+            className={`
+              hidden sm:flex btn
+              ${isMinecraftMode ? 'pixel-btn border-2 border-base-300 rounded-none' : 'btn-circle'}
+              ${imagePreview ? "text-emerald-500" : "text-zinc-400"}
+            `}
             onClick={() => fileInputRef.current?.click()}
           >
             <Image size={20} />
@@ -97,7 +110,10 @@ const MessageInput = () => {
         </div>
         <button
           type="submit"
-          className="btn btn-sm btn-circle"
+          className={`
+            btn btn-sm
+            ${isMinecraftMode ? 'pixel-btn border-2 border-primary rounded-none' : 'btn-circle'}
+          `}
           disabled={!text.trim() && !imagePreview}
         >
           <Send size={22} />

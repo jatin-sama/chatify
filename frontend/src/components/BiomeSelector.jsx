@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useThemeStore } from "../store/useThemeStore";
 import { BIOMES } from "../constants";
 import { ChevronDown } from "lucide-react";
@@ -6,39 +6,89 @@ import { ChevronDown } from "lucide-react";
 const BiomeSelector = () => {
   const { biome, setBiome, isMinecraftMode } = useThemeStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleBiomeChange = async (newBiome) => {
+    if (newBiome === biome) {
+      setIsOpen(false);
+      return;
+    }
+
+    // Special portal animation for Nether <-> Overworld transitions
+    const needsPortalAnimation =
+      (biome === 'nether' && newBiome === 'overworld') ||
+      (biome === 'overworld' && newBiome === 'nether');
+
+    if (needsPortalAnimation) {
+      setIsTransitioning(true);
+
+      // Add portal effect to body
+      document.body.classList.add('portal-transition');
+
+      // Wait for animation to reach midpoint
+      setTimeout(() => {
+        setBiome(newBiome);
+      }, 400);
+
+      // Remove transition classes after animation
+      setTimeout(() => {
+        setIsTransitioning(false);
+        document.body.classList.remove('portal-transition');
+      }, 800);
+    } else {
+      // Regular smooth transition
+      document.documentElement.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      setBiome(newBiome);
+      setTimeout(() => {
+        document.documentElement.style.transition = '';
+      }, 500);
+    }
+
+    setIsOpen(false);
+  };
 
   if (!isMinecraftMode) return null;
 
   const currentBiome = BIOMES.find(b => b.id === biome) || BIOMES[0];
 
   return (
-    <div className="relative">
+    <div className="relative biome-selector">
       <button
-        className="btn btn-ghost btn-sm flex items-center gap-2 biome-transition"
+        className={`
+          btn btn-ghost btn-sm flex items-center gap-2 biome-transition
+          ${isMinecraftMode ? 'pixel-btn text-xs font-mono border-2 border-base-300' : ''}
+          ${isTransitioning ? 'portal-transition' : ''}
+        `}
         onClick={() => setIsOpen(!isOpen)}
+        disabled={isTransitioning}
       >
         <span className="text-lg">{currentBiome.icon}</span>
-        <span className="hidden sm:inline text-sm">{currentBiome.name}</span>
+        <span className="hidden sm:inline text-sm biome-name">{currentBiome.name}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
         <>
-          <div 
-            className="fixed inset-0 z-10" 
+          <div
+            className="fixed inset-0 z-[60]"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute top-full right-0 mt-2 w-48 bg-base-100 rounded-lg shadow-lg border border-base-300 z-20">
+          <div className={`
+            absolute top-full right-0 mt-2 w-48 bg-base-100 shadow-xl border z-[70] max-h-[60vh] overflow-y-auto dropdown biome-selector-dropdown
+            ${isMinecraftMode ? 'rounded-none border-4 border-base-300 pixel-border' : 'rounded-lg border-base-300'}
+          `}>
             {BIOMES.map((biomeOption) => (
               <button
                 key={biomeOption.id}
                 className={`
-                  w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-base-200 first:rounded-t-lg last:rounded-b-lg
-                  ${biome === biomeOption.id ? 'bg-primary/10 text-primary' : ''}
+                  w-full px-3 py-2 text-left flex items-center gap-2 hover:bg-base-200
+                  transition-all duration-200
+                  ${isMinecraftMode ? 'pixel-btn border-0 font-mono text-xs' : ''}
+                  ${biome === biomeOption.id ? 'bg-primary/20 text-primary' : 'border-transparent'}
+                  first:rounded-t-lg last:rounded-b-lg
                 `}
                 onClick={() => {
-                  setBiome(biomeOption.id);
-                  setIsOpen(false);
+                  handleBiomeChange(biomeOption.id);
                 }}
               >
                 <span className="text-lg">{biomeOption.icon}</span>

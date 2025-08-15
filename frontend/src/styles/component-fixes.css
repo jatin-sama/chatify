@@ -1,0 +1,141 @@
+/* Fix overlapping components and improve spacing */
+
+/* Enhanced navbar z-index and spacing */
+.navbar {
+  z-index: 50 !important;
+}
+
+/* Proper spacing for navbar buttons */
+.navbar .btn {
+  margin: 0 1px;
+  white-space: nowrap;
+  min-width: auto;
+}
+
+/* BiomeSelector dropdown improvements */
+.biome-dropdown {
+  z-index: 60 !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Prevent text overflow in small buttons */
+.btn-sm span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Better mobile spacing and responsiveness */
+@media (max-width: 640px) {
+  .navbar .btn {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    gap: 0.25rem;
+    min-width: 2.5rem;
+  }
+  
+  .navbar .btn span {
+    display: none;
+  }
+  
+  .navbar .btn .lucide {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Hide biome name on mobile */
+  .biome-selector .biome-name {
+    display: none;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 768px) {
+  .navbar .btn span {
+    font-size: 0.75rem;
+  }
+}
+
+/* Fix z-index stacking order */
+.fixed {
+  z-index: 40;
+}
+
+.dropdown-content,
+.biome-selector-dropdown {
+  z-index: 70 !important;
+}
+
+/* Navbar container improvements */
+.navbar .container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Button group spacing */
+.navbar .flex.items-center.gap-2 {
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .navbar .flex.items-center.gap-2 {
+    gap: 0.75rem;
+  }
+}
+
+/* Prevent navbar content overflow */
+.navbar h1 {
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+@media (min-width: 640px) {
+  .navbar h1 {
+    font-size: 1.125rem;
+  }
+}
+
+/* Settings page content spacing */
+.settings-content {
+  padding-top: 6rem;
+}
+
+/* BiomeSelector positioning improvements */
+.biome-selector {
+  position: relative;
+}
+
+.biome-selector .dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  z-index: 70;
+}
+
+/* Pixel button improvements for better spacing */
+.pixel-btn {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Ensure proper spacing in Minecraft mode */
+.minecraft-ui .navbar .btn {
+  margin: 0 2px;
+}
+
+.minecraft-ui .navbar .btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+/* Mobile-specific fixes for Minecraft mode */
+@media (max-width: 640px) {
+  .minecraft-ui .navbar .btn {
+    padding: 0.25rem 0.5rem;
+    margin: 0 1px;
+  }
+  
+  .minecraft-ui .pixel-btn {
+    border-width: 2px;
+  }
+}
