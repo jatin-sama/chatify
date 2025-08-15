@@ -326,23 +326,23 @@
 
 /* Animated UI elements */
 .biome-overworld .btn:hover {
-  animation: grass-sway 2s ease-in-out infinite;
+  /* No animation */
 }
 
 .biome-nether .btn:hover {
-  animation: lava-bubble 1s ease-in-out infinite;
+  /* No animation */
 }
 
 .biome-end .btn:hover {
-  animation: end-float 3s ease-in-out infinite;
+  /* No animation */
 }
 
 .biome-cherry .btn:hover {
-  animation: petal-fall 3s ease-in-out infinite;
+  /* No animation */
 }
 
 .biome-deepdark .btn:hover {
-  animation: sculk-pulse 2s ease-in-out infinite;
+  /* No animation */
 }
 
 /* Navbar enhancements for biomes */
