@@ -1,5 +1,27 @@
 /* Biome-specific background patterns and effects */
 
+/* Background image optimizations */
+.biome-overworld,
+.biome-nether,
+.biome-end,
+.biome-cherry,
+.biome-deepdark {
+  background-attachment: fixed;
+  min-height: 100vh;
+  transition: background 0.8s ease-in-out;
+}
+
+/* Mobile optimization - disable fixed attachment for better performance */
+@media (max-width: 768px) {
+  .biome-overworld,
+  .biome-nether,
+  .biome-end,
+  .biome-cherry,
+  .biome-deepdark {
+    background-attachment: scroll;
+  }
+}
+
 /* Overworld */
 .biome-overworld {
   background:
