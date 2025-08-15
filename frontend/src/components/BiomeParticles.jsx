@@ -114,21 +114,8 @@ const BiomeParticles = () => {
     }
   };
 
-  if (!isMinecraftMode || !biome || particles.length === 0) {
-    return null;
-  }
-
-  return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className="absolute"
-          style={getParticleStyles(particle)}
-        />
-      ))}
-    </div>
-  );
+  // Always return null - no particles/animations
+  return null;
 };
 
 export default BiomeParticles;
