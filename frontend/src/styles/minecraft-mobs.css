@@ -181,7 +181,6 @@
 
 /* Hover effects */
 .minecraft-mob:hover {
-  animation: mob-hop 0.5s ease-in-out;
   cursor: pointer;
 }
 
