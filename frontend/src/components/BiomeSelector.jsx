@@ -52,7 +52,7 @@ const BiomeSelector = () => {
   const currentBiome = BIOMES.find(b => b.id === biome) || BIOMES[0];
 
   return (
-    <div className="relative">
+    <div className="relative biome-selector">
       <button
         className={`
           btn btn-ghost btn-sm flex items-center gap-2 biome-transition
