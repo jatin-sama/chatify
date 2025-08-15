@@ -191,45 +191,101 @@
 
 /* Enhanced chat bubbles for biomes */
 .biome-overworld .chat-bubble {
-  border-radius: 1rem;
-  border: 2px solid rgba(123, 199, 123, 0.3);
-  box-shadow: 0 4px 8px rgba(123, 199, 123, 0.1);
+  border-radius: 0;
+  border: 3px solid var(--color-border);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.3),
+    inset -2px -2px 0 rgba(0,0,0,0.2),
+    2px 2px 0 rgba(0,0,0,0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
 }
 
 .biome-nether .chat-bubble {
-  border-radius: 0.5rem;
-  border: 2px solid rgba(255, 107, 26, 0.3);
-  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.2);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,153,51,0.4),
+    inset -2px -2px 0 rgba(139,0,0,0.6),
+    2px 2px 0 rgba(0,0,0,0.3),
+    0 0 8px rgba(255,102,0,0.4);
   position: relative;
+  background: linear-gradient(145deg, rgba(255,102,0,0.1), rgba(139,0,0,0.1));
+  animation: lava-bubble 2s ease-in-out infinite;
 }
 
 .biome-nether .chat-bubble::before {
   content: '';
   position: absolute;
-  inset: -2px;
-  border-radius: 0.5rem;
-  background: linear-gradient(45deg, transparent, rgba(255, 107, 26, 0.1), transparent);
+  inset: -1px;
+  border-radius: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 102, 0, 0.2), transparent);
   z-index: -1;
+  animation: lava-glow 1.5s ease-in-out infinite alternate;
 }
 
 .biome-end .chat-bubble {
-  border-radius: 1.5rem;
-  border: 2px solid rgba(180, 122, 255, 0.3);
-  box-shadow: 0 4px 16px rgba(165, 110, 255, 0.15);
-  backdrop-filter: blur(4px);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(214,153,255,0.4),
+    inset -2px -2px 0 rgba(93,58,133,0.4),
+    2px 2px 0 rgba(43,43,43,0.3),
+    0 0 12px rgba(180,126,221,0.3);
+  backdrop-filter: blur(2px);
+  background: linear-gradient(145deg, rgba(255,251,240,0.1), rgba(180,126,221,0.05));
+  animation: end-float 4s ease-in-out infinite;
 }
 
 .biome-cherry .chat-bubble {
-  border-radius: 1.2rem;
-  border: 2px solid rgba(255, 179, 217, 0.3);
-  box-shadow: 0 4px 8px rgba(255, 138, 200, 0.1);
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(255,182,193,0.5),
+    inset -2px -2px 0 rgba(255,105,180,0.3),
+    2px 2px 0 rgba(0,0,0,0.1),
+    0 0 6px rgba(255,105,180,0.2);
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,105,180,0.05));
+  position: relative;
+}
+
+.biome-cherry .chat-bubble::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 6px;
+  height: 6px;
+  background: var(--particle-color);
+  border-radius: 50% 0 50% 0;
+  animation: petal-fall 3s ease-in-out infinite;
 }
 
 .biome-deepdark .chat-bubble {
-  border-radius: 0.8rem;
-  border: 2px solid rgba(26, 107, 138, 0.3);
-  box-shadow: 0 4px 20px rgba(6, 70, 99, 0.3);
-  animation: sculk-pulse 4s ease-in-out infinite;
+  border-radius: 0;
+  border: 3px solid var(--color-accent);
+  border-style: outset;
+  box-shadow:
+    inset 2px 2px 0 rgba(64,224,208,0.3),
+    inset -2px -2px 0 rgba(0,51,51,0.6),
+    2px 2px 0 rgba(0,0,0,0.5),
+    0 0 15px rgba(0,204,204,0.4);
+  background: linear-gradient(145deg, rgba(64,224,208,0.05), rgba(0,0,0,0.1));
+  animation: sculk-pulse 3s ease-in-out infinite;
+  position: relative;
+}
+
+.biome-deepdark .chat-bubble::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  background: linear-gradient(45deg, transparent, rgba(0,204,204,0.1), transparent);
+  z-index: -1;
+  animation: sculk-ambient 2s ease-in-out infinite alternate;
 }
 
 /* Animated UI elements */
