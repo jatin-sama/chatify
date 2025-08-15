@@ -96,11 +96,11 @@ const ProfilePage = () => {
               <label
                 htmlFor="avatar-upload"
                 className={`
-                  absolute bottom-0 right-0 
+                  absolute bottom-0 right-0
                   bg-base-content hover:scale-105
-                  p-2 cursor-pointer 
+                  cursor-pointer
                   transition-all duration-200
-                  ${isMinecraftMode ? 'rounded-none border-2 border-primary pixel-btn' : 'rounded-full'}
+                  ${isMinecraftMode ? 'rounded-none border-1 border-primary pixel-btn p-1 w-8 h-8 flex items-center justify-center' : 'rounded-full p-2'}
                   ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""}
                 `}
               >
