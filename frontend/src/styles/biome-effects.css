@@ -546,6 +546,91 @@
   text-shadow: 0 0 8px var(--glow-color);
 }
 
+/* Enhanced background image animations */
+
+/* Overworld background subtle movement */
+@keyframes overworld-sway {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% {
+    background-position: center calc(50% + 2px), center calc(50% + 2px), 0 0, 0 0;
+    filter: brightness(1.05) hue-rotate(2deg);
+  }
+}
+
+.biome-overworld {
+  animation: overworld-sway 20s ease-in-out infinite !important;
+}
+
+/* Nether background flickering effect */
+@keyframes nether-flicker {
+  0%, 100% {
+    filter: brightness(1) contrast(1) hue-rotate(0deg);
+  }
+  25% {
+    filter: brightness(1.1) contrast(1.1) hue-rotate(5deg);
+  }
+  75% {
+    filter: brightness(0.95) contrast(1.05) hue-rotate(-3deg);
+  }
+}
+
+.biome-nether {
+  animation: nether-flicker 4s ease-in-out infinite !important;
+}
+
+/* End background ethereal float */
+@keyframes end-ethereal {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) hue-rotate(0deg) blur(0px);
+  }
+  33% {
+    background-position: center calc(50% - 3px), center calc(50% - 3px), 0 0, 0 0;
+    filter: brightness(1.1) hue-rotate(10deg) blur(0.5px);
+  }
+  66% {
+    background-position: center calc(50% + 3px), center calc(50% + 3px), 0 0, 0 0;
+    filter: brightness(0.9) hue-rotate(-10deg) blur(0px);
+  }
+}
+
+.biome-end {
+  animation: end-ethereal 12s ease-in-out infinite !important;
+}
+
+/* Cherry background gentle breeze */
+@keyframes cherry-breeze {
+  0%, 100% {
+    background-position: center center, center center, 0 0, 0 0;
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    background-position: center calc(50% + 1px), center calc(50% + 1px), 5px 0, 0 0;
+    filter: brightness(1.05) saturate(1.1);
+  }
+}
+
+.biome-cherry {
+  animation: cherry-breeze 15s ease-in-out infinite !important;
+}
+
+/* Deep Dark background subtle pulse */
+@keyframes deepdark-pulse {
+  0%, 100% {
+    filter: brightness(0.8) contrast(1.2);
+  }
+  50% {
+    filter: brightness(1) contrast(1.4);
+  }
+}
+
+.biome-deepdark {
+  animation: deepdark-pulse 8s ease-in-out infinite !important;
+}
+
 /* Preview section specific styling */
 .biome-overworld .bg-base-100 {
   background-color: var(--color-bg) !important;
