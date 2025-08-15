@@ -15,13 +15,18 @@ export const useThemeStore = create((set, get) => ({
 
   setBiome: (biome) => {
     localStorage.setItem("chat-biome", biome);
-    // Remove any existing biome classes
-    BIOME_THEMES.forEach(b => {
-      document.documentElement.classList.remove(`biome-${b}`);
-    });
-    // Add new biome class
-    if (biome) {
-      document.documentElement.classList.add(`biome-${biome}`);
+    // Only apply biome if in Minecraft mode
+    if (get().isMinecraftMode) {
+      // Remove any existing biome classes
+      BIOME_THEMES.forEach(b => {
+        document.documentElement.classList.remove(`biome-${b}`);
+      });
+      // Remove theme attribute in Minecraft mode
+      document.documentElement.removeAttribute("data-theme");
+      // Add new biome class
+      if (biome) {
+        document.documentElement.classList.add(`biome-${biome}`);
+      }
     }
     set({ biome });
   },
