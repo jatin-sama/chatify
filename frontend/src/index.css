@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import './styles/biome-effects.css';
 @import './styles/biome-image-preload.css';
-@import './styles/component-fixes.css';
+@import './styles/component-fixes.css\';\n@import \'./styles/minecraft-mobs.css';
 
 @tailwind base;
 @tailwind components;
