@@ -28,12 +28,10 @@ const BiomeSelector = () => {
     <div className="relative biome-selector">
       <button
         className={`
-          btn btn-ghost btn-sm flex items-center gap-2 biome-transition
+          btn btn-ghost btn-sm flex items-center gap-2
           ${isMinecraftMode ? 'pixel-btn text-xs font-mono border-2 border-base-300' : ''}
-          ${isTransitioning ? 'portal-transition' : ''}
         `}
         onClick={() => setIsOpen(!isOpen)}
-        disabled={isTransitioning}
       >
         <span className="text-lg">{currentBiome.icon}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
