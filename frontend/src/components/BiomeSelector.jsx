@@ -63,7 +63,7 @@ const BiomeSelector = () => {
         disabled={isTransitioning}
       >
         <span className="text-lg">{currentBiome.icon}</span>
-        <span className="hidden sm:inline text-sm">{currentBiome.name}</span>
+        <span className="hidden sm:inline text-sm biome-name">{currentBiome.name}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
