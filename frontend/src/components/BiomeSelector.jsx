@@ -8,6 +8,45 @@ const BiomeSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  const handleBiomeChange = async (newBiome) => {
+    if (newBiome === biome) {
+      setIsOpen(false);
+      return;
+    }
+
+    // Special portal animation for Nether <-> Overworld transitions
+    const needsPortalAnimation =
+      (biome === 'nether' && newBiome === 'overworld') ||
+      (biome === 'overworld' && newBiome === 'nether');
+
+    if (needsPortalAnimation) {
+      setIsTransitioning(true);
+
+      // Add portal effect to body
+      document.body.classList.add('portal-transition');
+
+      // Wait for animation to reach midpoint
+      setTimeout(() => {
+        setBiome(newBiome);
+      }, 400);
+
+      // Remove transition classes after animation
+      setTimeout(() => {
+        setIsTransitioning(false);
+        document.body.classList.remove('portal-transition');
+      }, 800);
+    } else {
+      // Regular smooth transition
+      document.documentElement.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+      setBiome(newBiome);
+      setTimeout(() => {
+        document.documentElement.style.transition = '';
+      }, 500);
+    }
+
+    setIsOpen(false);
+  };
+
   if (!isMinecraftMode) return null;
 
   const currentBiome = BIOMES.find(b => b.id === biome) || BIOMES[0];
