@@ -31,6 +31,8 @@ export const useThemeStore = create((set, get) => ({
     if (enabled) {
       const currentBiome = get().biome || "overworld";
       document.documentElement.classList.add('minecraft-ui');
+      // Remove any existing theme attribute when switching to Minecraft mode
+      document.documentElement.removeAttribute("data-theme");
       get().setBiome(currentBiome);
     } else {
       // Remove all biome classes and minecraft styling
