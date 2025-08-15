@@ -5,7 +5,7 @@ const BIOME_THEMES = ["overworld", "nether", "end", "cherry", "deepdark"];
 export const useThemeStore = create((set, get) => ({
   theme: localStorage.getItem("chat-theme") || "coffee",
   biome: localStorage.getItem("chat-biome") || "overworld",
-  isMinecraftMode: localStorage.getItem("minecraft-mode") !== "false", // Default to true
+  isMinecraftMode: localStorage.getItem("minecraft-mode") === "true", // Default to false
 
   setTheme: (theme) => {
     localStorage.setItem("chat-theme", theme);
