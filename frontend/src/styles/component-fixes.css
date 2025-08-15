@@ -18,6 +18,16 @@
   backdrop-filter: blur(8px);
 }
 
+/* Remove shadows from all Minecraft mode components */
+.minecraft-ui .shadow,
+.minecraft-ui .shadow-sm,
+.minecraft-ui .shadow-md,
+.minecraft-ui .shadow-lg,
+.minecraft-ui .shadow-xl,
+.minecraft-ui .shadow-2xl {
+  box-shadow: none !important;
+}
+
 /* Prevent text overflow in small buttons */
 .btn-sm span {
   overflow: hidden;
@@ -134,8 +144,8 @@
     padding: 0.25rem 0.5rem;
     margin: 0 1px;
   }
-  
+
   .minecraft-ui .pixel-btn {
-    border-width: 2px;
+    border-width: 1px;
   }
 }
