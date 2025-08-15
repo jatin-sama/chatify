@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
+import { useThemeStore } from "../store/useThemeStore";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { Users } from "lucide-react";
 
 const Sidebar = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
-
   const { onlineUsers } = useAuthStore();
+  const { isMinecraftMode } = useThemeStore();
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
@@ -21,22 +22,41 @@ const Sidebar = () => {
   if (isUsersLoading) return <SidebarSkeleton />;
 
   return (
-    <aside className="h-full w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
-      <div className="border-b border-base-300 w-full p-5">
+    <aside className={`
+      h-full w-20 lg:w-72 border-r flex flex-col transition-all duration-200
+      ${isMinecraftMode ? 'border-r-4 border-base-300' : 'border-base-300'}
+    `}>
+      <div className={`
+        border-b w-full p-5
+        ${isMinecraftMode ? 'border-b-4 border-base-300' : 'border-base-300'}
+      `}>
         <div className="flex items-center gap-2">
           <Users className="size-6" />
-          <span className="font-medium hidden lg:block">Contacts</span>
+          <span className={`
+            font-medium hidden lg:block
+            ${isMinecraftMode ? 'font-mono text-sm' : ''}
+          `}>
+            💬 Contacts
+          </span>
         </div>
-        {/* TODO: Online filter toggle */}
+        {/* Online filter toggle */}
         <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
             <input
               type="checkbox"
               checked={showOnlineOnly}
               onChange={(e) => setShowOnlineOnly(e.target.checked)}
-              className="checkbox checkbox-sm"
+              className={`
+                checkbox checkbox-sm
+                ${isMinecraftMode ? 'rounded-none border-2' : ''}
+              `}
             />
-            <span className="text-sm">Show online only</span>
+            <span className={`
+              text-sm
+              ${isMinecraftMode ? 'font-mono text-xs' : ''}
+            `}>
+              Online only
+            </span>
           </label>
           <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>
         </div>
