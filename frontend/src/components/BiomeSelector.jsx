@@ -14,31 +14,8 @@ const BiomeSelector = () => {
       return;
     }
 
-    // Special portal animation for Nether <-> Overworld transitions
-    const needsPortalAnimation =
-      (biome === 'nether' && newBiome === 'overworld') ||
-      (biome === 'overworld' && newBiome === 'nether');
-
-    if (needsPortalAnimation) {
-      setIsTransitioning(true);
-
-      // Add portal effect to body
-      document.body.classList.add('portal-transition');
-
-      // Wait for animation to reach midpoint
-      setTimeout(() => {
-        setBiome(newBiome);
-      }, 400);
-
-      // Remove transition classes after animation
-      setTimeout(() => {
-        setIsTransitioning(false);
-        document.body.classList.remove('portal-transition');
-      }, 800);
-    } else {
-      // No transition - immediate change
-      setBiome(newBiome);
-    }
+    // No animations - immediate change
+    setBiome(newBiome);
 
     setIsOpen(false);
   };
