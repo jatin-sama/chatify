@@ -2,6 +2,7 @@ import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
+import { uploadImage } from "../lib/imageUpload.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -91,20 +92,66 @@ export const updateProfile = async (req, res) => {
     const userId = req.user._id;
 
     if (!profilePic) {
-      return res.status(400).json({ message: "Profile pic is required" });
+      return res.status(400).json({ message: "Profile picture is required" });
     }
 
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    // Validate base64 image format
+    if (!profilePic.startsWith('data:image/')) {
+      return res.status(400).json({ message: "Invalid image format" });
+    }
+
+    // Check if user exists
+    const existingUser = await User.findById(userId);
+    if (!existingUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Upload image with fallback handling
+    let uploadResponse;
+    try {
+      uploadResponse = await uploadImage(profilePic, {
+        folder: "chat_app_profiles"
+      });
+    } catch (uploadError) {
+      console.error("Image upload error:", uploadError);
+      return res.status(500).json({
+        message: uploadError.message || "Failed to upload image. Please try again with a smaller image."
+      });
+    }
+
+    // Update user profile
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { profilePic: uploadResponse.secure_url },
+      { profilePic: uploadResponse.url },
       { new: true }
-    );
+    ).select("-password");
 
-    res.status(200).json(updatedUser);
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Failed to update user profile" });
+    }
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      fullName: updatedUser.fullName,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+      createdAt: updatedUser.createdAt
+    });
   } catch (error) {
-    console.log("error in update profile:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error in update profile:", error);
+
+    // Handle specific error types
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: "Invalid data provided" });
+    }
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    res.status(500).json({
+      message: "Internal server error. Please try again later."
+    });
   }
 };
 

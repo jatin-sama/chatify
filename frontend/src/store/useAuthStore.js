@@ -71,12 +71,33 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (data) => {
     set({ isUpdatingProfile: true });
     try {
+      // Validate data before sending
+      if (!data.profilePic) {
+        throw new Error("Profile picture is required");
+      }
+
       const res = await axiosInstance.put("/auth/update-profile", data);
       set({ authUser: res.data });
-      toast.success("Profile updated successfully");
+      return { success: true, data: res.data };
     } catch (error) {
-      console.log("error in update profile:", error);
-      toast.error(error.response.data.message);
+      console.error("Error in update profile:", error);
+
+      // Handle different types of errors
+      let errorMessage = "Failed to update profile";
+
+      if (error.response) {
+        // Server responded with error status
+        errorMessage = error.response.data?.message || `Server error: ${error.response.status}`;
+      } else if (error.request) {
+        // Network error
+        errorMessage = "Network error. Please check your internet connection.";
+      } else {
+        // Other error
+        errorMessage = error.message || "An unexpected error occurred";
+      }
+
+      // Don't show toast here, let the component handle it
+      throw new Error(errorMessage);
     } finally {
       set({ isUpdatingProfile: false });
     }
