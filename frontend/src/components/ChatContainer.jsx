@@ -5,6 +5,7 @@ import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
+import { useThemeStore } from "../store/useThemeStore";
 import { formatMessageTime } from "../lib/utils";
 
 const ChatContainer = () => {
@@ -17,6 +18,7 @@ const ChatContainer = () => {
     unsubscribeFromMessages,
   } = useChatStore();
   const { authUser } = useAuthStore();
+  const { isMinecraftMode } = useThemeStore();
   const messageEndRef = useRef(null);
 
   useEffect(() => {
@@ -55,7 +57,10 @@ const ChatContainer = () => {
             ref={messageEndRef}
           >
             <div className=" chat-image avatar">
-              <div className="size-10 rounded-full border">
+              <div className={`
+                size-10 border
+                ${isMinecraftMode ? 'rounded-none border-4 border-base-300 pixel-border' : 'rounded-full'}
+              `}>
                 <img
                   src={
                     message.senderId === authUser._id
@@ -63,6 +68,7 @@ const ChatContainer = () => {
                       : selectedUser.profilePic || "/avatar.png"
                   }
                   alt="profile pic"
+                  className={isMinecraftMode ? 'image-rendering-pixelated' : ''}
                 />
               </div>
             </div>
@@ -71,15 +77,25 @@ const ChatContainer = () => {
                 {formatMessageTime(message.createdAt)}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col">
+            <div className={`
+              chat-bubble flex flex-col
+              ${isMinecraftMode ? 'pixel-bubble' : ''}
+            `}>
               {message.image && (
                 <img
                   src={message.image}
                   alt="Attachment"
-                  className="sm:max-w-[200px] rounded-md mb-2"
+                  className={`
+                    sm:max-w-[200px] mb-2
+                    ${isMinecraftMode ? 'rounded-none border-2 border-base-300 image-rendering-pixelated' : 'rounded-md'}
+                  `}
                 />
               )}
-              {message.text && <p>{message.text}</p>}
+              {message.text && (
+                <p className={isMinecraftMode ? 'font-mono text-xs leading-relaxed' : ''}>
+                  {message.text}
+                </p>
+              )}
             </div>
           </div>
         ))}
