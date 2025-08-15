@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <header
       className={`
-        navbar bg-base-100 border-b border-base-300 fixed w-full top-0 z-40 backdrop-blur-lg bg-base-100/80
+        navbar bg-base-100 border-b border-base-300 fixed w-full top-0 z-50 backdrop-blur-lg bg-base-100/80
         ${isMinecraftMode ? 'pixel-border border-4' : ''}
       `}
     >
@@ -32,14 +32,13 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
             <BiomeSelector />
             <Link
               to={"/settings"}
               className={`
-              btn btn-sm gap-2 transition-colors
-              ${isMinecraftMode ? 'pixel-btn border-2 border-base-300' : ''}
-
+                btn btn-sm gap-1 sm:gap-2 transition-colors
+                ${isMinecraftMode ? 'pixel-btn border-2 border-base-300 text-xs' : ''}
               `}
             >
               <Settings className="w-4 h-4" />
@@ -49,16 +48,16 @@ const Navbar = () => {
             {authUser && (
               <>
                 <Link to={"/profile"} className={`
-                  btn btn-sm gap-2
-                  ${isMinecraftMode ? 'pixel-btn border-2 border-base-300' : ''}
+                  btn btn-sm gap-1 sm:gap-2
+                  ${isMinecraftMode ? 'pixel-btn border-2 border-base-300 text-xs' : ''}
                 `}>
                   <User className="size-5" />
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
 
                 <button className={`
-                  flex gap-2 items-center btn btn-sm
-                  ${isMinecraftMode ? 'pixel-btn border-2 border-error' : ''}
+                  flex gap-1 sm:gap-2 items-center btn btn-sm
+                  ${isMinecraftMode ? 'pixel-btn border-2 border-error text-xs' : ''}
                 `} onClick={logout}>
                   <LogOut className="size-5" />
                   <span className="hidden sm:inline">Logout</span>
