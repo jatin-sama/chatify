@@ -54,6 +54,14 @@ export const useThemeStore = create((set, get) => ({
   // Initialize theme on app load
   initializeTheme: () => {
     const { theme, biome, isMinecraftMode } = get();
+
+    // Clean slate - remove all possible conflicting classes and attributes
+    document.documentElement.classList.remove('minecraft-ui');
+    BIOME_THEMES.forEach(b => {
+      document.documentElement.classList.remove(`biome-${b}`);
+    });
+    document.documentElement.removeAttribute("data-theme");
+
     if (isMinecraftMode) {
       document.documentElement.classList.add('minecraft-ui');
       if (biome) {
