@@ -1,5 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import './styles/biome-effects.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Minecraft-inspired font declarations */
+@font-face {
+  font-family: 'MinecraftPixel';
+  src: local('Press Start 2P'), local('Orbitron');
+  font-display: swap;
+}
+
+/* Global pixel styling for Minecraft mode */
+.minecraft-ui {
+  font-family: 'Press Start 2P', 'Orbitron', monospace;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Enhanced button styles for Minecraft theme */
+.pixel-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 3px solid;
+  border-style: outset;
+  border-radius: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.3),
+    inset -2px -2px 0 rgba(0,0,0,0.3),
+    2px 2px 0 rgba(0,0,0,0.2);
+  transition: all 0.1s ease;
+}
+
+.pixel-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow:
+    inset 2px 2px 0 rgba(255,255,255,0.4),
+    inset -2px -2px 0 rgba(0,0,0,0.4),
+    1px 1px 0 rgba(0,0,0,0.2);
+}
+
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow:
+    inset 2px 2px 0 rgba(0,0,0,0.3),
+    inset -2px -2px 0 rgba(255,255,255,0.1);
+}
+
+/* Pixel-style input fields */
+.pixel-input {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  border: 3px solid;
+  border-style: inset;
+  border-radius: 0;
+  padding: 0.75rem;
+  background: rgba(255,255,255,0.9);
+  box-shadow:
+    inset 2px 2px 0 rgba(0,0,0,0.1),
+    inset -2px -2px 0 rgba(255,255,255,0.8);
+}
+
+/* Chat bubble pixel styling */
+.pixel-bubble {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  border: 2px solid;
+  border-radius: 0;
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
+  box-shadow:
+    2px 2px 0 rgba(0,0,0,0.2),
+    inset 1px 1px 0 rgba(255,255,255,0.3);
+  position: relative;
+}
+
+.pixel-bubble::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border: inherit;
+  border-radius: 0;
+}
+
+/* Portal transition effect */
+.portal-transition {
+  animation: portalSpin 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes portalSpin {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    transform: scale(0.8) rotate(90deg);
+    filter: hue-rotate(180deg) brightness(1.5);
+  }
+  50% {
+    transform: scale(0.6) rotate(180deg);
+    filter: hue-rotate(360deg) brightness(2);
+  }
+  75% {
+    transform: scale(0.8) rotate(270deg);
+    filter: hue-rotate(180deg) brightness(1.5);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    filter: hue-rotate(0deg) brightness(1);
+  }
+}
