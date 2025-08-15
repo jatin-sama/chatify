@@ -106,21 +106,16 @@ export const updateProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Upload to Cloudinary with error handling
+    // Upload image with fallback handling
     let uploadResponse;
     try {
-      uploadResponse = await cloudinary.uploader.upload(profilePic, {
-        folder: "chat_app_profiles",
-        transformation: [
-          { width: 200, height: 200, crop: "fill" },
-          { quality: "auto" },
-          { fetch_format: "auto" }
-        ]
+      uploadResponse = await uploadImage(profilePic, {
+        folder: "chat_app_profiles"
       });
-    } catch (cloudinaryError) {
-      console.error("Cloudinary upload error:", cloudinaryError);
+    } catch (uploadError) {
+      console.error("Image upload error:", uploadError);
       return res.status(500).json({
-        message: "Failed to upload image. Please try again with a smaller image."
+        message: uploadError.message || "Failed to upload image. Please try again with a smaller image."
       });
     }
 
