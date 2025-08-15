@@ -49,7 +49,6 @@
     linear-gradient(180deg, transparent 0%, rgba(86, 192, 224, 0.1) 20%, transparent 40%);
   pointer-events: none;
   z-index: -1;
-  animation: cloud-drift 20s linear infinite;
 }
 
 @keyframes cloud-drift {
@@ -85,7 +84,6 @@
     linear-gradient(45deg, transparent 40%, rgba(255, 102, 0, 0.1) 50%, transparent 60%);
   pointer-events: none;
   z-index: -1;
-  animation: lava-glow 3s ease-in-out infinite alternate;
 }
 
 @keyframes lava-glow {
@@ -131,7 +129,6 @@
     linear-gradient(0deg, rgba(43, 43, 43, 0.6) 0%, transparent 30%);
   pointer-events: none;
   z-index: -1;
-  animation: void-shimmer 8s ease-in-out infinite;
 }
 
 @keyframes void-shimmer {
@@ -176,7 +173,6 @@
     radial-gradient(circle at 50% 10%, rgba(255, 105, 180, 0.1) 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
-  animation: petal-breeze 15s ease-in-out infinite;
 }
 
 @keyframes petal-breeze {
@@ -218,7 +214,6 @@
     radial-gradient(circle at 10% 10%, rgba(64, 224, 208, 0.15) 0%, transparent 45%);
   pointer-events: none;
   z-index: -1;
-  animation: sculk-ambient 4s ease-in-out infinite alternate;
 }
 
 @keyframes sculk-ambient {
@@ -259,7 +254,6 @@
     0 0 8px rgba(255,102,0,0.4);
   position: relative;
   background: linear-gradient(145deg, rgba(255,102,0,0.1), rgba(139,0,0,0.1));
-  animation: lava-bubble 2s ease-in-out infinite;
 }
 
 .biome-nether .chat-bubble::before {
@@ -269,7 +263,6 @@
   border-radius: 0;
   background: linear-gradient(45deg, transparent, rgba(255, 102, 0, 0.2), transparent);
   z-index: -1;
-  animation: lava-glow 1.5s ease-in-out infinite alternate;
 }
 
 .biome-end .chat-bubble {
@@ -283,7 +276,6 @@
     0 0 12px rgba(180,126,221,0.3);
   backdrop-filter: blur(2px);
   background: linear-gradient(145deg, rgba(255,251,240,0.1), rgba(180,126,221,0.05));
-  animation: end-float 4s ease-in-out infinite;
 }
 
 .biome-cherry .chat-bubble {
@@ -308,7 +300,6 @@
   height: 6px;
   background: var(--particle-color);
   border-radius: 50% 0 50% 0;
-  animation: petal-fall 3s ease-in-out infinite;
 }
 
 .biome-deepdark .chat-bubble {
@@ -321,7 +312,6 @@
     2px 2px 0 rgba(0,0,0,0.5),
     0 0 15px rgba(0,204,204,0.4);
   background: linear-gradient(145deg, rgba(64,224,208,0.05), rgba(0,0,0,0.1));
-  animation: sculk-pulse 3s ease-in-out infinite;
   position: relative;
 }
 
@@ -332,7 +322,6 @@
   border-radius: 0;
   background: linear-gradient(45deg, transparent, rgba(0,204,204,0.1), transparent);
   z-index: -1;
-  animation: sculk-ambient 2s ease-in-out infinite alternate;
 }
 
 /* Animated UI elements */
