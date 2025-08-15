@@ -104,7 +104,7 @@ const ProfilePage = () => {
                   ${isUpdatingProfile ? "animate-pulse pointer-events-none" : ""}
                 `}
               >
-                <Camera className="w-5 h-5 text-base-200" />
+                <Camera className={`text-base-200 ${isMinecraftMode ? 'w-4 h-4' : 'w-5 h-5'}`} />
                 <input
                   type="file"
                   id="avatar-upload"
