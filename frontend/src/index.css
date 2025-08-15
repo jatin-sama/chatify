@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-@import './styles/biome-effects.css\';\n@import \'./styles/biome-image-preload.css';
+@import './styles/biome-effects.css';
+@import './styles/biome-image-preload.css';
 
 @tailwind base;
 @tailwind components;
