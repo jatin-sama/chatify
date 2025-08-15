@@ -49,7 +49,6 @@ const App = () => {
       </Routes>
 
       <Toaster />
-      <ThemeDebug />
     </div>
   );
 };
