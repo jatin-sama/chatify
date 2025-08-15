@@ -14,35 +14,8 @@ const BiomeSelector = () => {
       return;
     }
 
-    // Special portal animation for Nether <-> Overworld transitions
-    const needsPortalAnimation =
-      (biome === 'nether' && newBiome === 'overworld') ||
-      (biome === 'overworld' && newBiome === 'nether');
-
-    if (needsPortalAnimation) {
-      setIsTransitioning(true);
-
-      // Add portal effect to body
-      document.body.classList.add('portal-transition');
-
-      // Wait for animation to reach midpoint
-      setTimeout(() => {
-        setBiome(newBiome);
-      }, 400);
-
-      // Remove transition classes after animation
-      setTimeout(() => {
-        setIsTransitioning(false);
-        document.body.classList.remove('portal-transition');
-      }, 800);
-    } else {
-      // Regular smooth transition
-      document.documentElement.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-      setBiome(newBiome);
-      setTimeout(() => {
-        document.documentElement.style.transition = '';
-      }, 500);
-    }
+    // No animations - immediate change
+    setBiome(newBiome);
 
     setIsOpen(false);
   };
@@ -55,15 +28,12 @@ const BiomeSelector = () => {
     <div className="relative biome-selector">
       <button
         className={`
-          btn btn-ghost btn-sm flex items-center gap-2 biome-transition
+          btn btn-ghost btn-sm flex items-center gap-2
           ${isMinecraftMode ? 'pixel-btn text-xs font-mono border-2 border-base-300' : ''}
-          ${isTransitioning ? 'portal-transition' : ''}
         `}
         onClick={() => setIsOpen(!isOpen)}
-        disabled={isTransitioning}
       >
         <span className="text-lg">{currentBiome.icon}</span>
-        <span className="hidden sm:inline text-sm biome-name">{currentBiome.name}</span>
         <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -82,7 +52,6 @@ const BiomeSelector = () => {
                 key={biomeOption.id}
                 className={`
                   w-full px-3 py-2 text-left flex items-center gap-2 hover:bg-base-200
-                  transition-all duration-200
                   ${isMinecraftMode ? 'pixel-btn border-0 font-mono text-xs' : ''}
                   ${biome === biomeOption.id ? 'bg-primary/20 text-primary' : 'border-transparent'}
                   first:rounded-t-lg last:rounded-b-lg

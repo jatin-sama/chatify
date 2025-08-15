@@ -17,7 +17,7 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
-  const { theme, initializeTheme } = useThemeStore();
+  const { theme, isMinecraftMode, initializeTheme } = useThemeStore();
 
   console.log({ onlineUsers });
 
@@ -36,7 +36,7 @@ const App = () => {
     );
 
   return (
-    <div data-theme={theme} className="biome-transition">
+    <div className="biome-transition">
       <BiomeParticles />
       <Navbar />
 
