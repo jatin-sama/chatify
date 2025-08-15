@@ -17,7 +17,7 @@ const ThemeDebug = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 bg-base-100 border border-base-300 rounded-lg p-3 text-xs space-y-2" style={{fontWeight: 'normal'}}>
+    <div className="fixed bottom-4 right-4 z-50 bg-base-100 border border-base-300 rounded-lg p-3 text-xs space-y-2">
       <div><strong>Debug Panel</strong></div>
       <div>Theme: {theme}</div>
       <div>Biome: {biome}</div>
