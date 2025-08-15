@@ -3,10 +3,15 @@
 /* Overworld */
 .biome-overworld {
   background:
+    linear-gradient(rgba(109, 179, 63, 0.7), rgba(109, 179, 63, 0.7)),
+    url('https://images.pexels.com/photos/740593/pexels-photo-740593.jpeg'),
     var(--block-texture),
     linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 100%);
-  background-size: 32px 32px, 100% 100%;
-  background-blend-mode: multiply;
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-overworld::before {
@@ -33,10 +38,15 @@
 /* Nether */
 .biome-nether {
   background:
+    linear-gradient(rgba(45, 15, 15, 0.8), rgba(45, 15, 15, 0.8)),
+    url('https://images.pexels.com/photos/73830/lava-magma-volcanic-eruption-glow-73830.jpeg'),
     var(--block-texture),
     radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
-  background-size: 32px 32px, 100% 100%;
-  background-blend-mode: multiply;
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-nether::before {
@@ -74,10 +84,15 @@
 /* End */
 .biome-end {
   background:
+    linear-gradient(rgba(255, 251, 240, 0.8), rgba(255, 251, 240, 0.6)),
+    url('https://images.pexels.com/photos/7245549/pexels-photo-7245549.jpeg'),
     var(--block-texture),
     linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 80%, #2b2b2b 100%);
-  background-size: 32px 32px, 100% 100%;
-  background-blend-mode: normal;
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: overlay, normal, normal, normal;
+  image-rendering: pixelated;
 }
 
 .biome-end::before {
@@ -115,10 +130,15 @@
 /* Cherry Grove */
 .biome-cherry {
   background:
+    linear-gradient(rgba(230, 242, 230, 0.7), rgba(240, 214, 232, 0.7)),
+    url('https://images.pexels.com/photos/32654435/pexels-photo-32654435.jpeg'),
     var(--block-texture),
     linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface) 50%, var(--color-bg) 100%);
-  background-size: 32px 32px, 100% 100%;
-  background-blend-mode: normal;
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, normal, normal;
+  image-rendering: pixelated;
 }
 
 .biome-cherry::before {
@@ -151,10 +171,15 @@
 /* Deep Dark */
 .biome-deepdark {
   background:
+    linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)),
+    url('https://images.pexels.com/photos/1878795/pexels-photo-1878795.jpeg'),
     var(--block-texture),
     radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
-  background-size: 32px 32px, 100% 100%;
-  background-blend-mode: multiply;
+  background-size: cover, cover, 32px 32px, 100% 100%;
+  background-position: center, center, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode: multiply, normal, multiply, normal;
+  image-rendering: pixelated;
 }
 
 .biome-deepdark::before {
