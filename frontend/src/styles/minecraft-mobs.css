@@ -1,0 +1,267 @@
+/* Minecraft Mob Pixel Art Styles */
+
+.minecraft-mob {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  animation: mob-idle 3s ease-in-out infinite;
+}
+
+.mob-grid {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 12.5%,
+    var(--mob-color) 12.5%,
+    var(--mob-color) 87.5%,
+    transparent 87.5%
+  ),
+  linear-gradient(
+    0deg,
+    transparent 0%,
+    transparent 12.5%,
+    var(--mob-color) 12.5%,
+    var(--mob-color) 87.5%,
+    transparent 87.5%
+  );
+  border-radius: 4px;
+}
+
+/* Creeper */
+.creeper {
+  --mob-color: #0d7f00;
+  background: #0d7f00;
+}
+
+.creeper-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+}
+
+.creeper-eyes {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.creeper-eyes .eye {
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 0;
+}
+
+.creeper-mouth {
+  width: 8px;
+  height: 12px;
+  background: #000;
+  margin: 0 auto;
+  position: relative;
+}
+
+.creeper-mouth::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  background: #000;
+}
+
+/* Skeleton */
+.skeleton {
+  --mob-color: #c6c6c6;
+  background: #c6c6c6;
+}
+
+.skeleton-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+}
+
+.skeleton-eyes {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.eye-socket {
+  width: 6px;
+  height: 8px;
+  background: #000;
+  border-radius: 0;
+}
+
+.skeleton-nose {
+  width: 3px;
+  height: 6px;
+  background: #000;
+  margin: 0 auto;
+}
+
+/* Zombie */
+.zombie {
+  --mob-color: #00aa00;
+  background: #00aa00;
+}
+
+.zombie-face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+}
+
+.zombie-eyes {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.zombie-eye {
+  width: 6px;
+  height: 6px;
+  background: #ff0000;
+  border-radius: 0;
+}
+
+.zombie-mouth {
+  width: 10px;
+  height: 6px;
+  background: #000;
+  margin: 0 auto;
+  position: relative;
+}
+
+.zombie-mouth::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  width: 2px;
+  height: 4px;
+  background: #fff;
+}
+
+.zombie-mouth::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  width: 2px;
+  height: 4px;
+  background: #fff;
+}
+
+/* Animations */
+@keyframes mob-idle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Hover effects */
+.minecraft-mob:hover {
+  animation: mob-hop 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+@keyframes mob-hop {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.1);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .minecraft-mob {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .creeper-face,
+  .skeleton-face,
+  .zombie-face {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .creeper-eyes .eye,
+  .zombie-eye {
+    width: 4px;
+    height: 4px;
+  }
+  
+  .eye-socket {
+    width: 4px;
+    height: 6px;
+  }
+  
+  .creeper-mouth {
+    width: 6px;
+    height: 8px;
+  }
+  
+  .zombie-mouth {
+    width: 8px;
+    height: 4px;
+  }
+  
+  .skeleton-nose {
+    width: 2px;
+    height: 4px;
+  }
+}
+
+/* Enhanced pixel art rendering */
+.minecraft-mob * {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Biome-specific color variations */
+.biome-nether .creeper {
+  --mob-color: #8b0000;
+  background: #8b0000;
+  filter: hue-rotate(180deg);
+}
+
+.biome-end .skeleton {
+  --mob-color: #e9e5c9;
+  background: #e9e5c9;
+  filter: brightness(1.2);
+}
+
+.biome-cherry .zombie {
+  --mob-color: #ff69b4;
+  background: #ff69b4;
+}
+
+.biome-deepdark .minecraft-mob {
+  filter: brightness(0.7) contrast(1.3);
+  box-shadow: 0 0 8px var(--glow-color);
+}
