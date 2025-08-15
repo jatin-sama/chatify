@@ -9,7 +9,10 @@ export const useThemeStore = create((set, get) => ({
 
   setTheme: (theme) => {
     localStorage.setItem("chat-theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
+    // Only apply theme if not in Minecraft mode
+    if (!get().isMinecraftMode) {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
     set({ theme });
   },
 
