@@ -31,9 +31,9 @@ const ChatContainer = () => {
 
   useEffect(() => {
     if (messageEndRef.current && messages) {
-      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messageEndRef.current.scrollIntoView({ behavior: isMinecraftMode ? "auto" : "smooth" });
     }
-  }, [messages]);
+  }, [messages, isMinecraftMode]);
 
   if (isMessagesLoading) {
     return (
@@ -49,7 +49,7 @@ const ChatContainer = () => {
     <div className="flex-1 flex flex-col overflow-auto">
       <ChatHeader />
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${isMinecraftMode ? 'ml-4' : ''}`}>
         {messages.map((message) => (
           <div
             key={message._id}
@@ -73,7 +73,7 @@ const ChatContainer = () => {
               </div>
             </div>
             <div className="chat-header mb-1">
-              <time className="text-xs opacity-50 ml-1">
+              <time className={`text-xs opacity-50 ${message.senderId === authUser._id ? 'mr-1' : 'ml-1'} ${isMinecraftMode ? 'font-mono' : ''}`}>
                 {formatMessageTime(message.createdAt)}
               </time>
             </div>
