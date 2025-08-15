@@ -69,22 +69,23 @@ const BiomeSelector = () => {
 
       {isOpen && (
         <>
-          <div 
-            className="fixed inset-0 z-10" 
+          <div
+            className="fixed inset-0 z-[60]"
             onClick={() => setIsOpen(false)}
           />
           <div className={`
-            absolute top-full right-0 mt-2 w-48 bg-base-100 shadow-lg border z-20
+            absolute top-full right-0 mt-2 w-48 bg-base-100 shadow-xl border z-[70] max-h-[60vh] overflow-y-auto
             ${isMinecraftMode ? 'rounded-none border-4 border-base-300 pixel-border' : 'rounded-lg border-base-300'}
           `}>
             {BIOMES.map((biomeOption) => (
               <button
                 key={biomeOption.id}
                 className={`
-                  w-full px-4 py-3 text-left flex items-center gap-3 hover:bg-base-200
-                  transition-all duration-200 pixel-btn border-0
-                  ${biome === biomeOption.id ? 'bg-primary/20 text-primary border-2 border-primary' : 'border-2 border-transparent'}
-                  ${isMinecraftMode ? 'font-mono text-xs' : ''}
+                  w-full px-3 py-2 text-left flex items-center gap-2 hover:bg-base-200
+                  transition-all duration-200
+                  ${isMinecraftMode ? 'pixel-btn border-0 font-mono text-xs' : ''}
+                  ${biome === biomeOption.id ? 'bg-primary/20 text-primary' : 'border-transparent'}
+                  first:rounded-t-lg last:rounded-b-lg
                 `}
                 onClick={() => {
                   handleBiomeChange(biomeOption.id);
