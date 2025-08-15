@@ -74,7 +74,7 @@ const BiomeSelector = () => {
             onClick={() => setIsOpen(false)}
           />
           <div className={`
-            absolute top-full right-0 mt-2 w-48 bg-base-100 shadow-xl border z-[70] max-h-[60vh] overflow-y-auto
+            absolute top-full right-0 mt-2 w-48 bg-base-100 shadow-xl border z-[70] max-h-[60vh] overflow-y-auto dropdown biome-selector-dropdown
             ${isMinecraftMode ? 'rounded-none border-4 border-base-300 pixel-border' : 'rounded-lg border-base-300'}
           `}>
             {BIOMES.map((biomeOption) => (
