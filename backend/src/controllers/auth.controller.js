@@ -91,20 +91,71 @@ export const updateProfile = async (req, res) => {
     const userId = req.user._id;
 
     if (!profilePic) {
-      return res.status(400).json({ message: "Profile pic is required" });
+      return res.status(400).json({ message: "Profile picture is required" });
     }
 
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    // Validate base64 image format
+    if (!profilePic.startsWith('data:image/')) {
+      return res.status(400).json({ message: "Invalid image format" });
+    }
+
+    // Check if user exists
+    const existingUser = await User.findById(userId);
+    if (!existingUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Upload to Cloudinary with error handling
+    let uploadResponse;
+    try {
+      uploadResponse = await cloudinary.uploader.upload(profilePic, {
+        folder: "chat_app_profiles",
+        transformation: [
+          { width: 200, height: 200, crop: "fill" },
+          { quality: "auto" },
+          { fetch_format: "auto" }
+        ]
+      });
+    } catch (cloudinaryError) {
+      console.error("Cloudinary upload error:", cloudinaryError);
+      return res.status(500).json({
+        message: "Failed to upload image. Please try again with a smaller image."
+      });
+    }
+
+    // Update user profile
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadResponse.secure_url },
       { new: true }
-    );
+    ).select("-password");
 
-    res.status(200).json(updatedUser);
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Failed to update user profile" });
+    }
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      fullName: updatedUser.fullName,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+      createdAt: updatedUser.createdAt
+    });
   } catch (error) {
-    console.log("error in update profile:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error in update profile:", error);
+
+    // Handle specific error types
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ message: "Invalid data provided" });
+    }
+
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    res.status(500).json({
+      message: "Internal server error. Please try again later."
+    });
   }
 };
 
