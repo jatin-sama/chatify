@@ -52,7 +52,6 @@ const BiomeSelector = () => {
                 key={biomeOption.id}
                 className={`
                   w-full px-3 py-2 text-left flex items-center gap-2 hover:bg-base-200
-                  transition-all duration-200
                   ${isMinecraftMode ? 'pixel-btn border-0 font-mono text-xs' : ''}
                   ${biome === biomeOption.id ? 'bg-primary/20 text-primary' : 'border-transparent'}
                   first:rounded-t-lg last:rounded-b-lg
