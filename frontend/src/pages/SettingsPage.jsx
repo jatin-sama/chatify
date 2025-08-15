@@ -11,7 +11,7 @@ const SettingsPage = () => {
   const { theme, setTheme, biome, setBiome, isMinecraftMode, setMinecraftMode } = useThemeStore();
 
   return (
-    <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+    <div className="min-h-screen container mx-auto px-4 pt-24 pb-8 max-w-5xl">
       <div className="space-y-6">
         {/* Minecraft Mode Toggle */}
         <div className="flex flex-col gap-4 p-4 bg-base-200 rounded-xl">
