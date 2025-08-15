@@ -30,44 +30,36 @@
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border: 3px solid;
-  border-style: outset;
+  border: 1px solid;
+  border-style: solid;
   border-radius: 0;
-  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
-  box-shadow:
-    inset 2px 2px 0 rgba(255,255,255,0.3),
-    inset -2px -2px 0 rgba(0,0,0,0.3),
-    2px 2px 0 rgba(0,0,0,0.2);
+  background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
+  box-shadow: none;
   transition: all 0.1s ease;
 }
 
 .pixel-btn:hover {
-  transform: translate(1px, 1px);
-  box-shadow:
-    inset 2px 2px 0 rgba(255,255,255,0.4),
-    inset -2px -2px 0 rgba(0,0,0,0.4),
-    1px 1px 0 rgba(0,0,0,0.2);
+  transform: none;
+  box-shadow: none;
+  opacity: 0.8;
 }
 
 .pixel-btn:active {
-  transform: translate(2px, 2px);
-  box-shadow:
-    inset 2px 2px 0 rgba(0,0,0,0.3),
-    inset -2px -2px 0 rgba(255,255,255,0.1);
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
 }
 
 /* Pixel-style input fields */
 .pixel-input {
   font-family: 'Press Start 2P', monospace;
   font-size: 0.75rem;
-  border: 3px solid;
-  border-style: inset;
+  border: 1px solid;
+  border-style: solid;
   border-radius: 0;
   padding: 0.75rem;
   background: rgba(255,255,255,0.9);
-  box-shadow:
-    inset 2px 2px 0 rgba(0,0,0,0.1),
-    inset -2px -2px 0 rgba(255,255,255,0.8);
+  box-shadow: none;
 }
 
 /* Chat bubble pixel styling */
@@ -75,12 +67,10 @@
   font-family: 'Press Start 2P', monospace;
   font-size: 0.75rem;
   line-height: 1.6;
-  border: 2px solid;
+  border: 1px solid;
   border-radius: 0;
   background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
-  box-shadow:
-    2px 2px 0 rgba(0,0,0,0.2),
-    inset 1px 1px 0 rgba(255,255,255,0.3);
+  box-shadow: none;
   position: relative;
 }
 
@@ -108,20 +98,20 @@
   .pixel-btn {
     font-size: 0.7rem;
     padding: 0.5rem;
-    border-width: 2px;
+    border-width: 1px;
   }
 
   .pixel-input {
     font-size: 0.7rem;
     padding: 0.5rem;
-    border-width: 2px;
+    border-width: 1px;
   }
 
   .pixel-bubble {
     font-size: 0.7rem;
     line-height: 1.4;
     padding: 0.5rem;
-    border-width: 2px;
+    border-width: 1px;
   }
 
   /* Smaller particles on mobile */
@@ -158,17 +148,12 @@
 /* Dark mode compatibility */
 @media (prefers-color-scheme: dark) {
   .minecraft-ui .pixel-btn {
-    box-shadow:
-      inset 2px 2px 0 rgba(255,255,255,0.1),
-      inset -2px -2px 0 rgba(0,0,0,0.5),
-      2px 2px 0 rgba(0,0,0,0.3);
+    box-shadow: none;
   }
 
   .minecraft-ui .pixel-input {
     background: rgba(0,0,0,0.3);
-    box-shadow:
-      inset 2px 2px 0 rgba(0,0,0,0.3),
-      inset -2px -2px 0 rgba(255,255,255,0.1);
+    box-shadow: none;
   }
 }
 
