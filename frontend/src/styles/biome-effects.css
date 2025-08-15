@@ -550,7 +550,7 @@
 }
 
 .biome-overworld {
-  animation: overworld-sway 20s ease-in-out infinite !important;
+  /* No animation */
 }
 
 /* Nether background flickering effect */
@@ -567,7 +567,7 @@
 }
 
 .biome-nether {
-  animation: nether-flicker 4s ease-in-out infinite !important;
+  /* No animation */
 }
 
 /* End background ethereal float */
@@ -587,7 +587,7 @@
 }
 
 .biome-end {
-  animation: end-ethereal 12s ease-in-out infinite !important;
+  /* No animation */
 }
 
 /* Cherry background gentle breeze */
@@ -603,7 +603,7 @@
 }
 
 .biome-cherry {
-  animation: cherry-breeze 15s ease-in-out infinite !important;
+  /* No animation */
 }
 
 /* Deep Dark background subtle pulse */
@@ -617,7 +617,7 @@
 }
 
 .biome-deepdark {
-  animation: deepdark-pulse 8s ease-in-out infinite !important;
+  /* No animation */
 }
 
 /* Preview section specific styling */
