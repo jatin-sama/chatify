@@ -96,6 +96,79 @@
   animation: portalSpin 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+/* Mobile responsive improvements */
+@media (max-width: 640px) {
+  .minecraft-ui {
+    font-size: 0.75rem;
+  }
+
+  .pixel-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    border-width: 2px;
+  }
+
+  .pixel-input {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    border-width: 2px;
+  }
+
+  .pixel-bubble {
+    font-size: 0.7rem;
+    line-height: 1.4;
+    padding: 0.5rem;
+    border-width: 2px;
+  }
+
+  /* Smaller particles on mobile */
+  .biome-particle {
+    width: 2px !important;
+    height: 2px !important;
+  }
+}
+
+/* Tablet responsive improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .pixel-btn {
+    font-size: 0.8rem;
+  }
+
+  .pixel-input {
+    font-size: 0.7rem;
+  }
+
+  .pixel-bubble {
+    font-size: 0.75rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .minecraft-ui {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .minecraft-ui .pixel-btn {
+    box-shadow:
+      inset 2px 2px 0 rgba(255,255,255,0.1),
+      inset -2px -2px 0 rgba(0,0,0,0.5),
+      2px 2px 0 rgba(0,0,0,0.3);
+  }
+
+  .minecraft-ui .pixel-input {
+    background: rgba(0,0,0,0.3);
+    box-shadow:
+      inset 2px 2px 0 rgba(0,0,0,0.3),
+      inset -2px -2px 0 rgba(255,255,255,0.1);
+  }
+}
+
 @keyframes portalSpin {
   0% {
     transform: scale(1) rotate(0deg);
