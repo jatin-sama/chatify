@@ -60,13 +60,12 @@
 .biome-nether {
   background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('https://cdn.builder.io/api/v1/image/assets%2F4f290852d1164d57a4d8d7957248f811%2F85d0253acdec4f268360c46f62a1b785?format=webp&width=800'),
-    var(--block-texture),
-    radial-gradient(ellipse at center, var(--color-surface) 0%, var(--color-bg) 100%);
-  background-size: cover, cover, 32px 32px, 100% 100%;
-  background-position: center, center, 0 0, 0 0;
-  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-  background-blend-mode: multiply, normal, multiply, normal;
+    url('https://cdn.builder.io/api/v1/image/assets%2F4f290852d1164d57a4d8d7957248f811%2F85d0253acdec4f268360c46f62a1b785?format=webp&width=800') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed;
+  min-height: 100vh;
   image-rendering: pixelated;
 }
 
