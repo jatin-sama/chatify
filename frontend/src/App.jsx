@@ -36,7 +36,7 @@ const App = () => {
     );
 
   return (
-    <div data-theme={theme} className="biome-transition">
+    <div className="biome-transition">
       <BiomeParticles />
       <Navbar />
 
